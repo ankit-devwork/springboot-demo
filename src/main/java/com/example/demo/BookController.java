@@ -27,8 +27,4 @@ public class BookController {
         books.add(book);
     }
 
-    @DeleteMapping("/{name}")
-    public void deleteBook(@PathVariable String name) {
-        books.remove(name);
-    }
 }
