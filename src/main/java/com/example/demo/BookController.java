@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/books")
@@ -27,4 +28,12 @@ public class BookController {
         books.add(book);
     }
 
+    @DeleteMapping("/{bookName}")
+    public ResponseEntity<String> deleteBook(@PathVariable String bookName) {
+        if (books.remove(bookName)) {
+            return ResponseEntity.ok("Book removed successfully.");
+        } else {
+            return ResponseEntity.status(404).body("Book not found.");
+        }
+    }
 }
