@@ -28,5 +28,12 @@ public class BookController {
         books.add(book);
     }
 
-
+    @DeleteMapping("/{index}")
+    public ResponseEntity<String> deleteBook(@PathVariable int index) {
+        if (index < 0 || index >= books.size()) {
+            return ResponseEntity.badRequest().body("Invalid index");
+        }
+        String removedBook = books.remove(index);
+        return ResponseEntity.ok("Deleted book: " + removedBook);
+    }
 }
